@@ -1,34 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ Listas con estilo | Mamoncete</title>
+  <!-- Fuente moderna y ligera -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    /* ——— RESET & BASE ——— */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 20% 30%, #0b0d15, #030405);
+      padding: 2rem 1rem;
+    }
+
+    /* ——— TARJETA PRINCIPAL ——— */
+    .card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(18, 22, 33, 0.75);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 3.5rem;
+      padding: 3rem 2.8rem;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 215, 100, 0.08) inset;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 40px 80px -18px #000000cc, 0 0 0 1px rgba(255, 215, 100, 0.2) inset;
+    }
+
+    /* ——— TÍTULOS ——— */
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fde68a 0%, #fbbf24 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+      display: inline-block;
+    }
+
+    .subhead {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 215, 100, 0.15);
+      padding-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      letter-spacing: -0.01em;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.25rem 1.2rem 0.25rem 0;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: "◆";
+      font-size: 1.2rem;
+      color: #fbbf24;
+      opacity: 0.6;
+      margin-right: 0.3rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(251, 191, 36, 0.12);
+      color: #fcd34d;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      border: 1px solid rgba(251, 191, 36, 0.15);
+      margin-left: 0.5rem;
+    }
+
+    /* ——— GRID DE LISTAS ——— */
+    .list-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 2rem;
+      margin-top: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .list-grid {
+        grid-template-columns: 1fr;
+        gap: 2.2rem;
+      }
+      .card {
+        padding: 2rem 1.5rem;
+        border-radius: 2.5rem;
+      }
+      h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    /* ——— LISTAS ——— */
+    .list-wrapper {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 2rem;
+      padding: 0.5rem 0 0.5rem 0;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: all 0.25s;
+    }
+
+    .list-wrapper:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(251, 191, 36, 0.15);
+    }
+
+    .list-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.4rem 1.2rem 0.8rem 1.2rem;
+      border-bottom: 1px dashed rgba(255, 215, 100, 0.1);
+      margin-bottom: 0.2rem;
+    }
+
+    .list-header span {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: #9ca3af;
+      text-transform: uppercase;
+    }
+
+    .list-header .count {
+      background: rgba(251, 191, 36, 0.08);
+      color: #fbbf24;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.1rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid rgba(251, 191, 36, 0.1);
+    }
+
+    /* ——— ESTILO DE LISTAS (ul) ——— */
+    ul {
+      list-style: none;
+      padding: 0.6rem 0.2rem 0.6rem 0.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    ul li {
+      padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #f3f4f6;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      backdrop-filter: blur(4px);
+    }
+
+    ul li::before {
+      content: "▸";
+      color: #fbbf24;
+      font-weight: 700;
+      font-size: 1.3rem;
+      opacity: 0.5;
+      transition: all 0.2s;
+      width: 1.6rem;
+      display: inline-block;
+    }
+
+    ul li:hover {
+      background: rgba(251, 191, 36, 0.06);
+      border-color: rgba(251, 191, 36, 0.15);
+      transform: translateX(4px) scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    ul li:hover::before {
+      opacity: 1;
+      transform: translateX(3px);
+      color: #fcd34d;
+    }
+
+    ul li p {
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }
+
+    /* ——— DETALLES EXTRA (iconos sutiles) ——— */
+    .list-wrapper:nth-child(1) ul li::before {
+      content: "⬡";
+      font-size: 1.2rem;
+    }
+    .list-wrapper:nth-child(2) ul li::before {
+      content: "✦";
+      font-size: 1.2rem;
+    }
+
+    .list-wrapper:nth-child(1) ul li:hover::before {
+      content: "⬢";
+    }
+    .list-wrapper:nth-child(2) ul li:hover::before {
+      content: "✧";
+    }
+
+    /* ——— FOOTER DECORATIVO ——— */
+    .glow-line {
+      margin-top: 2.5rem;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.15), transparent);
+      border-radius: 100%;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.2rem;
+      font-size: 0.7rem;
+      color: #4b5563;
+      letter-spacing: 0.04em;
+    }
+
+    .meta span {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.15rem 1rem;
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    /* ——— ANIMACIONES ——— */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .list-wrapper:hover {
+      animation: float 2.5s ease-in-out infinite;
+    }
+  </style>
 </head>
 <body>
-    <h1> Uso de listas</h1>
-    <h2>Materias</h2>
-    <ul>
-        <li>
-            <p>Matematica</p>
-        </li>
-        <li>
-            <p>Quimica</p>
-        </li>
-        <li>
-            <p>Fisica</p>
-        </li>
-    </ul>
-    <ul>
-        <li>
-            <p>Futbol</p>
-        </li>
-        <li>
-            <p>Danza</p>
-        </li>
-        <li>
-            <p>Volar coyol</p>
-        </li>
-    </ul>
+  <div class="card">
+    <!-- HEADER con estilo -->
+    <div class="subhead">
+      <h1>✦ listas</h1>
+      <span class="badge">✨ mamoncito</span>
+    </div>
+
+    <!-- Grid de dos columnas: Materias / Pasatiempos -->
+    <div class="list-grid">
+      <!-- BLOQUE 1: Materias -->
+      <div class="list-wrapper">
+        <div class="list-header">
+          <span>📚 materias</span>
+          <span class="count">3</span>
+        </div>
+        <ul>
+          <li><p>Matemática</p></li>
+          <li><p>Química</p></li>
+          <li><p>Física</p></li>
+        </ul>
+      </div>
+
+      <!-- BLOQUE 2: Pasatiempos -->
+      <div class="list-wrapper">
+        <div class="list-header">
+          <span>⚡ pasatiempos</span>
+          <span class="count">3</span>
+        </div>
+        <ul>
+          <li><p>Fútbol</p></li>
+          <li><p>Danza</p></li>
+          <li><p>Volar coyol</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Línea decorativa y firma -->
+    <div class="glow-line"></div>
+    <div class="meta">
+      <span>⏤ con estilo ⏤</span>
+    </div>
+  </div>
 </body>
 </html>
